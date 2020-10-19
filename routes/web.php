@@ -1,0 +1,31 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\MessageClient;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::view('/','home')->name('home');
+//Route::view('/cliente','cliente')->name('cliente');
+
+Route::post('/cliente',[MessageClient::class, 'store'])->name('cliente.store');
+
+Route::get('/cliente',[ClienteController::class, 'index'])->name('cliente.index');
+
+Route::get('/cliente/{IdCliente}',[ClienteController::class, 'show'])->name('cliente.show');
+
+
+
+Route::view('/factura','factura')->name('factura');
+
