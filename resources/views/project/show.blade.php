@@ -10,6 +10,7 @@
 <p>{{ $clientebd->cedula }}</p>
 <p>{{ $clientebd->email }}</p>
 <p>{{ $clientebd->departamento }}</p>
+<p>{{ $clientebd->direccion }}</p>
 
 @endsection
 
