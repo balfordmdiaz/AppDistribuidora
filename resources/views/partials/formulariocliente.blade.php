@@ -9,40 +9,45 @@
         <form  method="POST" action="{{ route('cliente.store') }}">
         @csrf
           <div class="form-group">
-              <input name="IdLCliente" type="text" class="form-control" placeholder="Codigo" />
+              <input name="IdLCliente" type="text" class="form-control" placeholder="Codigo" value="{{ old('IdLCliente') }}" />
+              {!! $errors->first('IdLCliente','<small>:message</small><br>') !!}
           </div>
 
           <div class="form-group">
-              <input name="Nombre" type="text" class="form-control" placeholder="Nombre" >
+              <input name="Nombre" type="text" class="form-control" placeholder="Nombre" value="{{ old('Nombre') }}">
+              {!! $errors->first('Nombre','<small>:message</small><br>') !!}
           </div>
 
           <div class="form-group">
-              <input name="Apellido" type="text" class="form-control" placeholder="Apellido" >
+              <input name="Apellido" type="text" class="form-control" placeholder="Apellido" value="{{ old('Apellido') }}" >
+              {!! $errors->first('Apellido','<small>:message</small><br>') !!}
           </div>
 
           <div class="form-group">
-              <input name="Cedula" type="text" class="form-control" placeholder="Cedula"> 
+              <input name="Cedula" type="text" class="form-control" placeholder="Cedula" value="{{ old('Cedula') }}" >
+              {!! $errors->first('Cedula','<small>:message</small><br>') !!}
           </div>
 
           <div class="form-group">
-              <input name="Telefono" type="number" class="form-control" placeholder="Telefono" >
+              <input name="Telefono" type="number" class="form-control" placeholder="Telefono" value="{{ old('Telefono') }}" >
+              {!! $errors->first('Telefono','<small>:message</small><br>') !!}
           </div>
 
           <div class="form-group">
-            <input name="Departamento" type="text" class="form-control" placeholder="Departamento" >
+            <input name="Departamento" type="text" class="form-control" placeholder="Departamento" value="{{ old('Departamento') }}" >
+            {!! $errors->first('Departamento','<small>:message</small><br>') !!}
           </div>
 
           <div class="form-group">
-              <textarea name="Direccion" class="form-control" placeholder="Direccion" ></textarea>
+              <textarea name="Direccion" class="form-control" placeholder="Direccion" value="{{ old('Direccion') }}" ></textarea>
+              {!! $errors->first('Direccion','<small>:message</small><br>') !!}
           </div>
           <div class="form-group">
-              <input name="Email" type="email" class="form-control" placeholder="Email"/>
+              <input name="Email" type="email" class="form-control" placeholder="Email" value="{{ old('Email') }}" />
           </div>
           
           <div id="boton_form_client">
-          <button  class="btn btn-primary btn-lg" >Registrar</button>
-          <button  class="btn btn-primary btn-lg" >Buscar</button>
-          <button  class="btn btn-primary btn-lg" >Actualizar</button>
+             <button  class="btn btn-primary btn-lg" onclick="return confirm('Estas seguro de Insertar nuevo usuario')">Registrar</button>
           </div>
 
 

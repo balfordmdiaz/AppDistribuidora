@@ -235,6 +235,17 @@ a.navbar-brand span {
     }
 }
 
+#tablacliente a {
+    padding: 1%;
+    border: 1px solid #000;
+}
+
+#tablacliente a:hover {
+    background-color: #36cbd4;
+    padding: 1%;
+    color: #fff;
+}
+
 /*--------------------------------------------*/
 
 .services {

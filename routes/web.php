@@ -19,13 +19,17 @@ use App\Http\Controllers\MessageClient;
 Route::view('/','home')->name('home');
 //Route::view('/cliente','cliente')->name('cliente');
 
-Route::post('/cliente',[MessageClient::class, 'store'])->name('cliente.store');
+Route::post('/cliente',[MessageClient::class, 'store'])->name('cliente.store');//Messageclient se encargara de la gestion de clientes
+
+Route::post('/cliente/{Idcliente}/edit',[MessageClient::class, 'update'])->name('cliente.update');
+
+Route::get('/cliente/insertar',[ClienteController::class, 'insertar'])->name('cliente.insertar');
 
 Route::get('/cliente',[ClienteController::class, 'index'])->name('cliente.index');
 
-Route::get('/cliente/{IdCliente}',[ClienteController::class, 'show'])->name('cliente.show');
+Route::get('/cliente/{Idcliente}',[ClienteController::class, 'show'])->name('cliente.show');
 
-
+Route::get('/cliente/{Idcliente}/edit',[ClienteController::class, 'edit'])->name('cliente.edit');
 
 Route::view('/factura','factura')->name('factura');
 

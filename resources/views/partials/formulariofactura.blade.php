@@ -6,23 +6,25 @@
       <div class="row contact-wrap">
         <div class="col-md-8 col-md-offset-2">
           
-          <form  method="">
+        <form  method="" action="{{ route('factura') }}">
           @csrf
             
             <div class="form-group">
-                <input name="codigocliente" type="text" class="form-control" placeholder="Codigo Cliente" />
+              <label for="idcliente">codigo cliente:</label>
+              <select  name="codigocliente" class="form-control"></select>
             </div>
 
             <div class="form-group">
-                <input name="codigofactura" type="text" class="form-control" placeholder="Codigo Factura" >
+                <input name="codigofactura" type="text" class="form-control" placeholder="Codigo factura">
             </div>
 
             <div class="form-group">
-                <input name="codigoempleado" type="text" class="form-control" placeholder="Codigo Empleado" >
+                <input name="codigoempleado" type="text" class="form-control" placeholder="Codigo empleado">
             </div>
 
             <div class="form-group">
-                <input name="codigoproducto" type="text" class="form-control" placeholder="Codigo Producto">
+                <label for="idempleado">codigo producto:</label>
+                <select  name="codigoproducto" class="form-control"></select>            
             </div>
 
             <div class="form-group">
@@ -57,9 +59,8 @@
 
             
             <div id="boton_form_factura">
-
-               <button  class="btn btn-primary btn-lg" >Buscar</button>
-               <button  class="btn btn-primary btn-lg" >Modificar</button>
+             
+               <button  class="btn btn-primary btn-lg" >Nuevo</button>
                <button  class="btn btn-primary btn-lg" >Limpiar</button>
                <button  class="btn btn-primary btn-lg" >Agregar</button>
 
