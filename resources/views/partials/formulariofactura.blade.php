@@ -6,25 +6,40 @@
       <div class="row contact-wrap">
         <div class="col-md-8 col-md-offset-2">
           
-        <form  method="" action="{{ route('factura') }}">
-          @csrf
-            
+        <form id="formulariofactura" method="" action="">
+        @csrf
+        
             <div class="form-group">
               <label for="idcliente">codigo cliente:</label>
-              <select  name="codigocliente" class="form-control"></select>
+              <select  name="idlcliente" class="form-control">
+                    @forelse($cliente as $clienteItem)
+                            <option value="{{ $clienteItem->idcliente }}">{{ $clienteItem->idlcliente }} {{ $clienteItem->nombre }} {{ $clienteItem->departamento }}</option>
+                    @empty
+                            <option value="">No hay Clientes</option>
+                    @endforelse
+                 
+              </select>
             </div>
 
             <div class="form-group">
-                <input name="codigofactura" type="text" class="form-control" placeholder="Codigo factura">
+                <input name="idlfactura" type="text" class="form-control" placeholder="Codigo factura">
             </div>
 
             <div class="form-group">
-                <input name="codigoempleado" type="text" class="form-control" placeholder="Codigo empleado">
+                <input name="idlempleado" type="text" class="form-control" placeholder="Codigo empleado">
             </div>
 
             <div class="form-group">
-                <label for="idempleado">codigo producto:</label>
-                <select  name="codigoproducto" class="form-control"></select>            
+                <label for="idarticulo">producto:</label>
+                <select  id="idlarticulo" name="idlarticulo" class="form-control" onchange="ShowSelected();">
+                    @forelse($articulo as $articuloItem)
+                          <option value="{{ $articuloItem->idarticulo }}">{{ $articuloItem->idlarticulo }} {{ $articuloItem->descripcion }}</option>
+                          
+                    @empty
+                          <option value="">No hay Articulo</option>
+                    @endforelse
+                               
+                </select>            
             </div>
 
             <div class="form-group">
@@ -46,7 +61,7 @@
             </div>
 
             <div class="form-group">
-                <input name="preciounitario" type="number" step="any" class="form-control" placeholder="Precio Unitario"/>        
+                  <input name="precio" id="precio" type="number" step="any" class="form-control" />        
             </div>
 
             <div class="form-group">

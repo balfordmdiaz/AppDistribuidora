@@ -9,8 +9,8 @@
         <form  method="POST" action="{{ route('cliente.store') }}">
         @csrf
           <div class="form-group">
-              <input name="IdLCliente" type="text" class="form-control" placeholder="Codigo" value="{{ old('IdLCliente') }}" />
-              {!! $errors->first('IdLCliente','<small>:message</small><br>') !!}
+              <input name="Idlcliente" type="text" class="form-control" placeholder="Codigo Cliente" value="{{ old('Idlcliente') }}" />
+              {!! $errors->first('Idlcliente','<small>:message</small><br>') !!}
           </div>
 
           <div class="form-group">
@@ -44,6 +44,7 @@
           </div>
           <div class="form-group">
               <input name="Email" type="email" class="form-control" placeholder="Email" value="{{ old('Email') }}" />
+              {!! $errors->first('Email','<small>:message</small><br>') !!}
           </div>
           
           <div id="boton_form_client">

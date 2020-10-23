@@ -16,34 +16,42 @@
           @csrf
           
             <div class="form-group">
-                <input name="IdLCliente" type="text" class="form-control" placeholder="Codigo" value="{{$clientebd->idlcliente}}" />
+                <input name="Idlcliente" type="text" class="form-control" placeholder="Codigo Cliente" value="{{$clientebd->idlcliente}}" />
+                {!! $errors->first('Idlcliente','<small>:message</small><br>') !!}
             </div>
   
             <div class="form-group">
                 <input name="Nombre" type="text" class="form-control" placeholder="Nombre" value="{{$clientebd->nombre}}" >
+                {!! $errors->first('Nombre','<small>:message</small><br>') !!}
             </div>
   
             <div class="form-group">
                 <input name="Apellido" type="text" class="form-control" placeholder="Apellido" value="{{$clientebd->apellido}}" >
+                {!! $errors->first('Apellido','<small>:message</small><br>') !!}
             </div>
   
             <div class="form-group">
                 <input name="Cedula" type="text" class="form-control" placeholder="Cedula" value="{{$clientebd->cedula}}" > 
+                {!! $errors->first('Cedula','<small>:message</small><br>') !!}
             </div>
   
             <div class="form-group">
                 <input name="Telefono" type="number" class="form-control" placeholder="Telefono" value="{{$clientebd->telefono}}" >
+                {!! $errors->first('Telefono','<small>:message</small><br>') !!}
             </div>
   
             <div class="form-group">
               <input name="Departamento" type="text" class="form-control" placeholder="Departamento" value="{{$clientebd->departamento}}" >
+              {!! $errors->first('Departamento','<small>:message</small><br>') !!}
             </div>
   
             <div class="form-group">
                 <textarea name="Direccion" class="form-control" placeholder="Direccion" >{{$clientebd->direccion}}</textarea>
+                {!! $errors->first('Direccion','<small>:message</small><br>') !!}
             </div>
             <div class="form-group">
                 <input name="Email" type="email" class="form-control" placeholder="Email" value="{{$clientebd->email}}" />
+                {!! $errors->first('Email','<small>:message</small><br>') !!}
             </div>
             
             <div id="boton_form_client">

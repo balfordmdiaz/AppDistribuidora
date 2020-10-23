@@ -233,17 +233,51 @@ a.navbar-brand span {
         display: flex;
         flex-direction: column-reverse;
     }
+
+    #tablacliente {
+        font-size: 8pt; /* Hacer mas pequeña las letras de la tabla cuando sea responsive*/
+    }
+}
+
+/* Estilo al boton nuevo cliente */
+#boton_nuevocliente {
+    background-color: #fafafa;
+    margin: 10px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    /* IMPORTANTE */
+    text-align: center;
+}
+
+#boton_nuevocliente h5 {
+    color: #36cbd4;
+}
+/*------enlaces de la tabla-------------------*/
+
+#padreenlaces {
+    display: flex;
 }
 
 #tablacliente a {
-    padding: 1%;
+    padding: 5px;
+    color: #fff;
     border: 1px solid #000;
 }
 
-#tablacliente a:hover {
-    background-color: #36cbd4;
-    padding: 1%;
-    color: #fff;
+#b_editar a {
+    background: #ffbe5f;
+}
+
+#b_detalle a {
+    background: #65adff;
+}
+
+#b_editar a:hover {
+    background: #d57f00;
+}
+
+#b_detalle a:hover {
+    background: #0063d5;
 }
 
 /*--------------------------------------------*/

@@ -6,7 +6,7 @@
 <br>
 <br>
 
-<div class="page-header popular-tags">
+<div id="boton_nuevocliente">
 <div class="text-center">
      <h5>Nuevo cliente</h5>
      <a href="{{ route('cliente.insertar')}}"><i class="fa fa-plus fa-3x"></i></a>
@@ -35,8 +35,10 @@
           <td>{{ $clienteItem->nombre }}</td>
           <td>{{ $clienteItem->departamento }}</td>
           <td>
-               <a href="{{ route('cliente.edit',$clienteItem->idcliente,'edit') }}" >Editar</a>
-               <a href="{{ route('cliente.show',$clienteItem->idcliente) }}">Detalles</a>
+               <div id="padreenlaces">
+               <div id="b_editar"><a href="{{ route('cliente.edit',$clienteItem->idcliente,'edit') }}" >Editar</a></div>|
+               <div id="b_detalle"><a href="{{ route('cliente.show',$clienteItem->idcliente) }}" >Detalles</a></div>
+               </div>
           </td> 
        </tr>
           

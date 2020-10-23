@@ -13,7 +13,7 @@ class MessageClient extends Controller
         // Validaciones del formulario
 
         request()->validate([
-            'IdLCliente' => 'required',
+            'Idlcliente' => 'required',
             'Nombre'  => 'required',
             'Apellido'  => 'required',
             'Cedula'  => 'required',
@@ -41,7 +41,7 @@ class MessageClient extends Controller
         //Insertar con enloquent que es la manera nueva de laravel
 
         clienteBD::create([
-            'idlcliente' => request('IdLCliente'),
+            'idlcliente' => request('Idlcliente'),
             'nombre' => request('Nombre'),
             'apellido' => request('Apellido'),
             'cedula' => request('Cedula'),
@@ -55,15 +55,29 @@ class MessageClient extends Controller
 
 
         //return redirect('/cliente')->with('message', 'Insercion exitosa');
-        return back()->with('success','Item created successfully!');
+        request()->session()->flash('alert-success', 'Se agrego corectamente!');
+        return redirect()->route("cliente.index");
     }
 
     public function update($id)
     {
+
+        request()->validate([
+            'Idlcliente' => 'required',
+            'Nombre'  => 'required',
+            'Apellido'  => 'required',
+            'Cedula'  => 'required',
+            'Telefono'  => 'required',
+            'Departamento'  => 'required',
+            'Direccion'  => 'required',
+            'Email'  => 'required|email'
+            
+        ]);
+
          $datoscliente=request()->except(['_token','_method']);
          clienteBD::where('idcliente','=',$id)->update($datoscliente);
 
-         return back()->with('success','cambio hecho');
+         return redirect()->route("cliente.index");
     }
 
 

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\MessageClient;
+use App\Http\Controllers\FacturaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,5 +32,7 @@ Route::get('/cliente/{Idcliente}',[ClienteController::class, 'show'])->name('cli
 
 Route::get('/cliente/{Idcliente}/edit',[ClienteController::class, 'edit'])->name('cliente.edit');
 
-Route::view('/factura','factura')->name('factura');
+//Route::view('/factura','factura')->name('factura');
+
+Route::get('/factura',[FacturaController::class, 'index'])->name('factura.index');
 
