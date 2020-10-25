@@ -23,17 +23,7 @@
         document.getElementById('boton').style.display = "none";
      }     
   } 
-  
-  function ShowSelected()
-  {
-     var elementos = document.getElementById('idlarticulo').value;
-     const art = {!! json_encode($articulo) !!};
-     console.log(art);
-     var aux=art[elementos-1].precio;
-     document.getElementById('precio').value=aux;
 
-  };
-  window.onload = ShowSelected; //para que cargue la funcion desde el principio
   
 
 </script>

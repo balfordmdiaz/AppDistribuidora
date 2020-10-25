@@ -7,7 +7,9 @@
 <section id="contact-page">
     <div class="container">
       <div class="center">
-        <h2>Ediatr Cliente</h2>
+        <br>
+        <br>
+        <h2>Editar Cliente</h2>
       </div>
       <div class="row contact-wrap">
         <div class="col-md-8 col-md-offset-2">
@@ -16,7 +18,7 @@
           @csrf
           
             <div class="form-group">
-                <input name="Idlcliente" type="text" class="form-control" placeholder="Codigo Cliente" value="{{$clientebd->idlcliente}}" />
+                <input name="Idlcliente" type="text" class="form-control" placeholder="Codigo Cliente"  value="{{$clientebd->idlcliente}}" readonly="readonly"/>
                 {!! $errors->first('Idlcliente','<small>:message</small><br>') !!}
             </div>
   
@@ -55,7 +57,7 @@
             </div>
             
             <div id="boton_form_client">
-               <button  class="btn btn-primary btn-lg" onclick="return confirm('Estas seguro de editar el usuario')">Actualizar</button>
+               <button  class="btn btn-primary btn-lg" onclick="toastr.success('El registro se ha editado correctamente','Registro Actualizado',{timeOut:3000});">Actualizar</button>
             </div>
   
   

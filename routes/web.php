@@ -36,3 +36,5 @@ Route::get('/cliente/{Idcliente}/edit',[ClienteController::class, 'edit'])->name
 
 Route::get('/factura',[FacturaController::class, 'index'])->name('factura.index');
 
+Route::get('/factura/insertar',[FacturaController::class, 'insertar'])->name('factura.insertar');
+

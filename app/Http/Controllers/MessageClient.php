@@ -55,7 +55,6 @@ class MessageClient extends Controller
 
 
         //return redirect('/cliente')->with('message', 'Insercion exitosa');
-        request()->session()->flash('alert-success', 'Se agrego corectamente!');
         return redirect()->route("cliente.index");
     }
 

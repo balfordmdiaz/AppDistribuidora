@@ -240,7 +240,8 @@ a.navbar-brand span {
 }
 
 /* Estilo al boton nuevo cliente */
-#boton_nuevocliente {
+#boton_nuevocliente,
+#boton_nuevoFactura {
     background-color: #fafafa;
     margin: 10px;
     padding: 10px;
@@ -249,9 +250,11 @@ a.navbar-brand span {
     text-align: center;
 }
 
-#boton_nuevocliente h5 {
+#boton_nuevocliente,
+#boton_nuevoFactura h5 {
     color: #36cbd4;
 }
+
 /*------enlaces de la tabla-------------------*/
 
 #padreenlaces {

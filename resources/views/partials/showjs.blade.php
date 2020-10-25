@@ -20,7 +20,40 @@
         document.getElementById('boton').style.display = "";
      } else
      {
+        
         document.getElementById('boton').style.display = "none";
+        
      }     
   }  
+
+  function ShowSelected()
+  {
+     
+     var elementos = document.getElementById('idlarticulo').value; //obtener el id articulo seleccionado
+     const art = {!! json_encode($articulo ?? '') !!};
+     console.log(art);
+     var precioaux=art[elementos-1].precio;
+     document.getElementById('precio').value=precioaux;
+
+     var cantidadaux=document.getElementById('cantidad').value;
+     var subtotalaux=precioaux*cantidadaux;
+     document.getElementById('subtotal').value=subtotalaux;
+
+
+     if(document.getElementById('chec').checked)
+     {
+         document.getElementById('boton').value=subtotalaux*0.15; //Este es el Iva         
+     }
+     else
+     {
+        document.getElementById('boton').value=0;
+     }
+     var auxiva= document.getElementById('boton').value;
+     var auxdescuento=document.getElementById('descuento').value;
+     document.getElementById('total').value=(parseFloat(subtotalaux)+parseFloat(auxiva))-parseFloat(auxdescuento);
+
+
+  };
+  window.onload = ShowSelected; //para que cargue la funcion desde el principio
+
 </script>

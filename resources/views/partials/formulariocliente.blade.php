@@ -6,7 +6,7 @@
     <div class="row contact-wrap">
       <div class="col-md-8 col-md-offset-2">
         
-        <form  method="POST" action="{{ route('cliente.store') }}">
+        <form id="formcliente" method="POST" action="{{ route('cliente.store') }}">
         @csrf
           <div class="form-group">
               <input name="Idlcliente" type="text" class="form-control" placeholder="Codigo Cliente" value="{{ old('Idlcliente') }}" />
@@ -48,7 +48,7 @@
           </div>
           
           <div id="boton_form_client">
-             <button  class="btn btn-primary btn-lg" onclick="return confirm('Estas seguro de Insertar nuevo usuario')">Registrar</button>
+             <button  class="btn btn-primary btn-lg" onclick="toastr.success('El registro se ingreso correctamente','Nuevo Registro',{timeOut:3000});">Registrar</button>
           </div>
 
 
@@ -59,3 +59,32 @@
   </div>
   <!--/.container-->
 </section>
+
+
+
+<script>
+  /*
+  $('#formcliente').onclick(function(e)
+  {
+      e.preventDefault();
+
+      $.ajax({
+              url:"{{ route('cliente.store') }}",
+              type:"POST",
+          },
+          success.function(response)
+          {
+              if(response)
+              {
+                 $('#formcliente')[0].reset();
+                 toastr.success('El registro se ingreso correctamente','Nuevo Registro',{timeOut:3000});
+
+              }
+          }
+      )
+
+  
+  });
+  console.log("agua");
+  */
+</script>
