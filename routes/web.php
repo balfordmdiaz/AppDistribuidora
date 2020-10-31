@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\MessageClient;
 use App\Http\Controllers\FacturaController;
+use App\Http\Controllers\Messagefactura;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,4 +38,6 @@ Route::get('/cliente/{Idcliente}/edit',[ClienteController::class, 'edit'])->name
 Route::get('/factura',[FacturaController::class, 'index'])->name('factura.index');
 
 Route::get('/factura/insertar',[FacturaController::class, 'insertar'])->name('factura.insertar');
+
+Route::post('/factura/insertar',[Messagefactura::class, 'store'])->name('factura.store');
 

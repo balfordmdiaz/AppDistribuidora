@@ -235,7 +235,7 @@ a.navbar-brand span {
     }
 
     #tablacliente {
-        font-size: 8pt; /* Hacer mas pequeña las letras de la tabla cuando sea responsive*/
+        font-size: 7pt; /* Hacer mas pequeña las letras de la tabla cuando sea responsive*/
     }
 }
 
@@ -262,7 +262,7 @@ a.navbar-brand span {
 }
 
 #tablacliente a {
-    padding: 5px;
+    padding: 3px;
     color: #fff;
     border: 1px solid #000;
 }

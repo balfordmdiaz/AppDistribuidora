@@ -57,7 +57,7 @@
             </div>
             
             <div id="boton_form_client">
-               <button  class="btn btn-primary btn-lg" onclick="toastr.success('El registro se ha editado correctamente','Registro Actualizado',{timeOut:3000});">Actualizar</button>
+               <button  class="btn btn-primary btn-lg" onclick="toastr.info('El registro se ha editado correctamente','Registro Actualizado',{timeOut:3000});">Actualizar</button>
             </div>
   
   

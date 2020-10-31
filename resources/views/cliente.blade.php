@@ -1,4 +1,4 @@
-@extends('layoutshow')
+@extends('layout')
 
 @section('title','cliente')
 @section('content')
@@ -48,12 +48,13 @@
               <p>No hay clientes para mostrar</p>
          </td>
        </tr>
-
-@endforelse
     </tbody>
+@endforelse
 </table>
 
-
+<div class="text-center">
+<p>{!! $cliente->links() !!}</p>
+</div>
 
 <!--Lo comento para no desechar este codigo
 <ul>

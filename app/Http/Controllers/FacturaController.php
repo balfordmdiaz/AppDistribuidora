@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\clienteBD;
 use App\Models\articuloBD;
 use App\Models\facturaBD;
+use App\Models\empleadoBD;
 
 use Illuminate\Http\Request;
 
@@ -21,7 +22,8 @@ class FacturaController extends Controller
         $cliente=clienteBD::get();
         $articulo=articuloBD::get();
         $factura=facturaBD::get();
-        return view('project.insertarfact',compact('factura','cliente','articulo'));
+        $empleado=empleadoBD::get();
+        return view('project.insertarfact',compact('factura','cliente','articulo','empleado'));
     }
 
 }

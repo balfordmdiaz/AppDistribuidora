@@ -1,4 +1,4 @@
-@extends('layoutshow')
+@extends('layout')
 
 @section('title','Insertar')
 

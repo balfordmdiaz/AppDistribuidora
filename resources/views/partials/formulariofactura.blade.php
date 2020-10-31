@@ -6,7 +6,7 @@
       <div class="row contact-wrap">
         <div class="col-md-8 col-md-offset-2">
           
-        <form id="formulariofactura" method="" action="">
+        <form id="formulariofactura" method="POST" action="{{ route('factura.store') }}">
         @csrf
         
             <div class="form-group">
@@ -26,7 +26,16 @@
             </div>
 
             <div class="form-group">
-                <input name="idlempleado" type="text" class="form-control" placeholder="Codigo empleado">
+                  <label for="idemp" style="float: left">producto:</label>
+                  <select  id="idlempleado" name="idlempleado" class="form-control">
+                      @forelse($empleado as $empleadoItem)
+                            <option value="{{ $empleadoItem->idempleado }}">{{ $empleadoItem->idlempleado }} {{ $empleadoItem->nombre }}</option>
+                        
+                      @empty
+                            <option value="">No hay Articulo</option>
+                      @endforelse
+                             
+                  </select>  
             </div>
 
             <div class="form-group">
@@ -60,7 +69,7 @@
 
             <div class="form-group">
                 <label for="" style="float: left">Cantidad:</label>
-                <input name="cantidad" id="cantidad" type="number" class="form-control" value="1" onkeyup="ShowSelected();"/>
+                <input name="cantidad" id="cantidad" type="number" class="form-control"  onkeyup="ShowSelected();" min="1" pattern="^[0-9]+" oninput="this.value = Math.max(this.value, 1)"/>
             </div>
 
             <div class="form-group" >
@@ -91,4 +100,8 @@
     </div>
     <!--/.container-->
   </section>
+
+
+
+
 

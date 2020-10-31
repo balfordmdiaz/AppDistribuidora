@@ -17,12 +17,6 @@
     </div>
 </div>
 
-<div id="boton_nuevoFactura">
-    <div class="text-center">
-         <h5>Lista de Factura</h5>
-         <a href=""><i class="fa fa-list fa-3x"></i></a>
-    </div>
-</div>
-    
+
 @endsection
    
