@@ -12,4 +12,6 @@ class clienteBD extends Model
     protected $primaryKey = 'idcliente';
 
     protected $fillable = ['idlcliente','nombre','apellido','cedula','telefono','departamento','direccion','email'];
+    
+    public $timestamps = false;
 }

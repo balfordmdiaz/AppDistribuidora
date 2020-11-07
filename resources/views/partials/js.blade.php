@@ -1,5 +1,6 @@
+   
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="{{asset('static/js/jquery-2.1.1.min.js')}}"></script> 
+    <script src="{{asset('static/js/jquery-2.1.1.min.js')}}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{{asset('static/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('static/js/wow.min.js')}}"></script>
@@ -9,9 +10,8 @@
     <script type="text/javascript" src="{{asset('static/js/fliplightbox.min.js')}}"></script>
     <script src="{{asset('static/js/functions.js')}}"></script>
 
-    <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js')}}"></script>
-    <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js')}}"></script>
+
+ 
 
 
 <script type="text/javascript">

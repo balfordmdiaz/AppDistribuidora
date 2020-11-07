@@ -13,4 +13,6 @@ class articuloBD extends Model
     protected $primaryKey = 'idarticulo';
 
     protected $fillable = ['idlarticulo','descripcion','medida','precio','idarticulostock'];
+
+    public $timestamps = false;
 }

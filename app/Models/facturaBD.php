@@ -12,4 +12,6 @@ class facturaBD extends Model
     protected $primaryKey = 'idfactura';
 
     protected $fillable = ['idlfactura','fechafactura','iva','descuento','subtotal','total','idcliente','idempleado'];
+
+    public $timestamps = false;
 }

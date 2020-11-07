@@ -6,6 +6,7 @@ use App\Models\clienteBD;
 use App\Models\articuloBD;
 use App\Models\facturaBD;
 use App\Models\empleadoBD;
+use App\Models\factdetalleDB;
 
 use Illuminate\Http\Request;
 
@@ -23,7 +24,8 @@ class FacturaController extends Controller
         $articulo=articuloBD::get();
         $factura=facturaBD::get();
         $empleado=empleadoBD::get();
-        return view('project.insertarfact',compact('factura','cliente','articulo','empleado'));
+        $detalle=factdetalleDB::get();
+        return view('project.insertarfact',compact('factura','cliente','articulo','empleado','detalle'));
     }
 
 }

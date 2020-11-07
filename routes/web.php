@@ -6,6 +6,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\MessageClient;
 use App\Http\Controllers\FacturaController;
 use App\Http\Controllers\Messagefactura;
+use App\Http\Controllers\FactDetalleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,4 +41,11 @@ Route::get('/factura',[FacturaController::class, 'index'])->name('factura.index'
 Route::get('/factura/insertar',[FacturaController::class, 'insertar'])->name('factura.insertar');
 
 Route::post('/factura/insertar',[Messagefactura::class, 'store'])->name('factura.store');
+
+Route::get('/factura/insertar/{id}/index',[FactDetalleController::class, 'index'])->name('factura.vistafactura');
+
+Route::post('/factura/insertar/{id}/index',[FactDetalleController::class, 'store'])->name('factura.agregar');
+
+
+
 

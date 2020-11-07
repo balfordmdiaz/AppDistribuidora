@@ -12,4 +12,6 @@ class empleadoBD extends Model
     protected $primaryKey = 'idempleado';
 
     protected $fillable = ['idlempleado','nombre','apellido','cedula','telefono','direccion','email'];
+
+    public $timestamps = false;
 }
