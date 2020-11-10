@@ -20,9 +20,28 @@
      if (obj.checked)
      {
         document.getElementById('boton').style.display = "";
+        document.getElementById('mas_iva').style.display = "";
+
+
      } else
      {
         document.getElementById('boton').style.display = "none";
+        document.getElementById('mas_iva').style.display = "none";
+      
+        
+     }     
+  } 
+
+  function comprobarDescuento(obj)
+  {   
+     if (obj.checked)
+     {
+        document.getElementById('descuento').style.display = "";
+        document.getElementById('mas_descuento').style.display = "";
+     } else
+     {
+        document.getElementById('descuento').style.display = "none";
+        document.getElementById('mas_descuento').style.display = "none";
      }     
   } 
 

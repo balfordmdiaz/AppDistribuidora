@@ -40,11 +40,6 @@
                   </select>  
             </div>
 
-            <div class="form-group">
-                <label for="" style="float: left">Fecha:</label>
-                <input name="fecha" type="datetime-local" class="form-control" value="{{ old('fecha') }}">
-                {!! $errors->first('fecha','<small>:message</small><br>') !!}
-            </div>
          
             <div id="boton_form_factura">
                <button  class="btn btn-primary btn-lg" onclick="toastr.success('El registro se ingreso correctamente','Nuevo Registro',{timeOut:3000});">Realizar Factura</button>

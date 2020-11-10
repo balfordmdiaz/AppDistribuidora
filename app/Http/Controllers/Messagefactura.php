@@ -7,6 +7,8 @@ use App\Models\facturaBD;
 use App\Models\factdetalleDB;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
+use DateTime;
+use DateTimeZone;
 
 
 class Messagefactura extends Controller
@@ -22,12 +24,16 @@ class Messagefactura extends Controller
 
         request()->validate([
             'idlfactura' => 'required',
-            'fecha'  => 'required',
+            
         ]);
 
+        $dt = new DateTime("now", new DateTimeZone('America/Managua'));
+        
+
+        
         facturaBD::create([
             'idlfactura' => request('idlfactura'),
-            'fechafactura' => request('fecha'),
+            'fechafactura' => $dt->format('Y/m/d, H:i:s'),
             'iva' => $auxiva,
             'descuento' => $auxdescuento,
             'subtotal' => $auxsubtotal,
@@ -40,6 +46,7 @@ class Messagefactura extends Controller
         $factura = facturaBD::where('idlfactura', $aux)->first();
 
         return redirect()->route('factura.vistafactura',$factura->idfactura);
+        
         
     }
 

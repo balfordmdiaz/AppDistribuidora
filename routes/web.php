@@ -46,6 +46,10 @@ Route::get('/factura/insertar/{id}/index',[FactDetalleController::class, 'index'
 
 Route::post('/factura/insertar/{id}/index',[FactDetalleController::class, 'store'])->name('factura.agregar');
 
+Route::get('/factura/insertar/{id}/index/facturar',[FactDetalleController::class, 'facturador'])->name('factura.facturar');
+
+Route::get('/factura/insertar/{id}/index/facturar/descargar',[FactDetalleController::class, 'descargar'])->name('factura.descargar');
+
 
 
 

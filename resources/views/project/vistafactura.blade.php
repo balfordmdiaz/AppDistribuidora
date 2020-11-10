@@ -67,21 +67,26 @@
                   <input name="chec" type="checkbox" id="chec" onChange="comprobar(this);" onclick="ShowSelected();" />
                   <label for="chec">IVA(opcional)</label>
                   <input name="Iva" type="number" id="boton" class="form-control" step="any" style="display:none" placeholder="IVA" readonly="readonly"/>
+
+                  <button type="submit" name="action" id="mas_iva" style="display:none" class="btn btn-primary btn-lg" value="iva">+ Iva</button>
           </div>
 
           <div class="form-group">
-            <label for="" style="float: left">Descuento:</label>
-            <input name="descuento" id="descuento" type="number" step="any" class="form-control" min="0" value="0" onkeyup="ShowSelected();" pattern="^[0-9]+" oninput="this.value = Math.max(this.value, 0)"/>
+              <input name="chec" type="checkbox" id="chec_descuento" onChange="comprobarDescuento(this);" onclick="ShowSelected();" />
+              <label for="chec">Descuento(opcional)</label>
+              <input name="descuento" id="descuento" type="number" step="any" class="form-control" style="display:none" min="0" value="0" onkeyup="ShowSelected();" pattern="^[0-9]+" oninput="this.value = Math.max(this.value, 0)"/>
+
+              <button type="submit" name="action" id="mas_descuento" style="display:none" class="btn btn-primary btn-lg" value="descuento">+ Descuento</button>
       </div>
 
-          <div class="form-group">
+          <div class="form-group" style="display:none">
             <label for="" style="float: left">Total:</label>
             <input id="total" name="total" type="number" step="any" class="form-control" readonly="readonly" />
             {!! $errors->first('total','<small>:message</small><br>') !!}         
           </div>
 
           <div id="boton_form_factura">
-            <button type="submit" name="action" class="btn btn-primary btn-lg" value="finalizar">Finalizar</button>
+            <button type="submit" name="action" class="btn btn-primary btn-lg" value="facturar">Facturar</button>    
             <button type="submit" name="action" class="btn btn-primary btn-lg" value="agregar">Agregar Articulo</button>
           </div> 
            
@@ -105,8 +110,8 @@
            <tr>
               <th scope="col">Id</th>
               <th scope="col">Art</th>
-              <th scope="col">cantidad</th>
-              <th scope="col">precio</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Precio</th>
               <th scope="col">Monto</th>
            </tr>
       </thead>
@@ -137,6 +142,39 @@
       </tbody>
 
      @endforelse
+
+     <tr>
+       
+       <td></td>
+       <td></td>
+       <th>Subtotal</th>
+       <td colspan="2">{{ $facturabd->subtotal }} C$</td>
+     </tr>
+
+     <tr>
+       
+       <td></td>
+       <td></td>
+       <th>Iva</th>
+       <td colspan="2">{{ $facturabd->iva }} C$</td>
+     </tr>
+
+    <tr>
+       
+       <td></td>
+       <td></td>
+       <th>Desc</th>
+       <td colspan="2">{{ $facturabd->descuento }} C$</td>
+    </tr>
+
+    <tr>
+       
+       <td></td>
+       <td></td>
+       <th>Total</th>
+       <td colspan="2">{{ $facturabd->total }} C$</td>
+    </tr>
+
   </table>
   
 
@@ -146,9 +184,13 @@
 <script>
   function ShowSelected()
   {
+    
    //obtener el id articulo seleccionado
    var elementos = document.getElementById('idlarticulo').value;
    console.log(elementos);
+   const subtotalbd = {!! json_encode($facturabd->subtotal ?? '') !!};
+   var subtotal_aux=subtotalbd;
+
 
    if(elementos>0)
    {
@@ -162,23 +204,38 @@
    montoaux=precioaux*cantidadaux;
 
    document.getElementById('monto').value=montoaux;
+
+   //
    if(document.getElementById('chec').checked)
    {
       //Este es el Iva 
-      document.getElementById('boton').value=montoaux*0.15;         
+      document.getElementById('boton').value=subtotal_aux*0.15;         
    }
    else
    {
       document.getElementById('boton').value=0;
    }
+
+   if(document.getElementById('chec_descuento').checked)
+   {
+     //si el check del descunto esta habilitado
+   }
+   else
+   {
+      document.getElementById('descuento').value=0;
+   }
+
+
    var auxiva= document.getElementById('boton').value;
    var auxdescuento=document.getElementById('descuento').value;
+  
         if(auxdescuento==null)
         {
           auxdescuento=0.00;
           console.log(auxdescuento);
         }
-   document.getElementById('total').value=(parseFloat(montoaux)+parseFloat(auxiva))-parseFloat(auxdescuento);
+
+   document.getElementById('total').value=parseFloat(montoaux);
    }
  
 
