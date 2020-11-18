@@ -9,10 +9,10 @@ class articuloBD extends Model
 {
     use HasFactory;
 
-    protected $table='tbl_articulo';
-    protected $primaryKey = 'idarticulo';
+    protected $table='tbl_articulovariante';
+    protected $primaryKey = 'idarticulov';
 
-    protected $fillable = ['idlarticulo','descripcion','medida','precio','idarticulostock'];
+    protected $fillable = ['talla','color','cantidad','precio','idarticulos'];
 
     public $timestamps = false;
 }

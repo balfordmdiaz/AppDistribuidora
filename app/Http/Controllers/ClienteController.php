@@ -37,7 +37,12 @@ class ClienteController extends Controller
 
     public function insertar()
     {
-        $cliente=clienteBD::get();
+        $cliente=clienteBD::latest('idcliente')->first();
+        if(!$cliente)
+        {
+            $cliente=new clienteBD();
+            $cliente->idcliente=0;
+        }
         return view('project.insertar',compact('cliente'));
     }
 

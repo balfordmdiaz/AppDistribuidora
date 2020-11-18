@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\facturaBD;
 use App\Models\factdetalleDB;
 use Illuminate\Support\Facades\DB;
-use Yajra\DataTables\DataTables;
+
 use DateTime;
 use DateTimeZone;
 

@@ -3,6 +3,7 @@
 @section('title',$facturabd->idlfactura)
 
 @section('content')
+@inject('articulostock', 'App\Services\Article')
 <br>
 <br>
 <br>
@@ -37,25 +38,56 @@
            </div>
 
           <div class="form-group">
-              <label for="" style="float: left">Articulo:</label> 
-              <select  id="idlarticulo" name="idlarticulo" class="form-control" onchange="ShowSelected();">
-                  @forelse($articulo = DB::table('tbl_articulo')->get() as $articuloItem)
-                      <option value="{{ $articuloItem->idarticulo }}">{{ $articuloItem->idlarticulo }} {{ $articuloItem->descripcion }}</option>    
-                  @empty
-                      <option value="">No hay Articulo</option>
-                  @endforelse               
-              </select>    
+            <label for="" style="float: left">Articulo:</label> 
+            <select  id="idarticulostock" name="idarticulos" class="form-control" >
+              @foreach($articulostock->get() as $index => $article)
+                   <option value="{{ $index }}" {{ old('idarticulos') == $index ? 'selected' : '' }}>
+                      {{ $article }}
+                   </option>
+              @endforeach  
+              
+
+            </select> 
+            @if ($errors->has('idarticulos'))
+               <span class="invalid-feedback" role="alert">
+                   <strong>{{ $errors->first('idarticulos') }}</strong>
+               </span>
+            @endif   
+         </div>
+
+          <div class="form-group">
+              <label for="" style="float: left">Talla Articulo:</label> 
+              <select  id="idarticulov" name="idarticulov" data-old="{{ old('idarticulov') }}" class="form-control{{ $errors->has('idarticulov') ? ' is-invalid' : '' }}">
+              </select> 
+
+              @if ($errors->has('idarticulov'))
+                   <span class="invalid-feedback" role="alert">
+                       <strong>{{ $errors->first('idarticulov') }}</strong>
+                   </span>
+              @endif
           </div>
+        
+          <div class="form-group">
+            <label for="" style="float: left">Color Articulo:</label> 
+            <select  id="color" data-old="{{ old('idarticulo') }}" name="idarticulo" class="form-control{{ $errors->has('idarticulo') ? ' is-invalid' : '' }}">
+            </select> 
+
+            @if ($errors->has('idarticulo'))
+                 <span class="invalid-feedback" role="alert">
+                     <strong>{{ $errors->first('idarticulo') }}</strong>
+                 </span>
+            @endif
+        </div>
 
           <div class="form-group">
              <label for="" style="float: left">Cantidad:</label>
-             <input name="cantidad" id="cantidad" type="number" class="form-control"  onkeyup="ShowSelected();" pattern="^[0-9]+" oninput="this.value = Math.max(this.value, 0)"/>
-             {!! $errors->first('cantidad','<small>:message</small><br>') !!}
+             <input name="cantidad" id="cantidad" type="number" class="form-control"  onkeyup="loadprecio()" pattern="^[0-9]+" oninput="this.value = Math.max(this.value, 0)"/>
+             {!! $errors->first('cantidad','<small class="message_error">:message</small><br>') !!}
           </div>
 
           <div class="form-group" >
                <label for="" style="float: left">Precio:</label>
-               <input name="precio" id="precio" type="number" step="any" class="form-control" readonly="readonly"/>        
+               <input name="precio" id="precio" type="number" step="any" class="form-control" value="{{ old('precio') }}" readonly="readonly"/>        
           </div>
 
           <div class="form-group">
@@ -64,30 +96,31 @@
           </div>
 
           <div class="form-group">
-                  <input name="chec" type="checkbox" id="chec" onChange="comprobar(this);" onclick="ShowSelected();" />
+                  <input name="chec" type="checkbox" id="chec" onChange="comprobar(this);" onclick="loadcalculos();" />
                   <label for="chec">IVA(opcional)</label>
                   <input name="Iva" type="number" id="boton" class="form-control" step="any" style="display:none" placeholder="IVA" readonly="readonly"/>
 
-                  <button type="submit" name="action" id="mas_iva" style="display:none" class="btn btn-primary btn-lg" value="iva">+ Iva</button>
+                  <button type="submit" name="action" id="mas_iva" style="display:none" class="btn btn-primary btn-lg" value="iva"><i class="fa fa-plus fa-1x"></i> Iva</button>
           </div>
 
           <div class="form-group">
-              <input name="chec" type="checkbox" id="chec_descuento" onChange="comprobarDescuento(this);" onclick="ShowSelected();" />
+              <input name="chec" type="checkbox" id="chec_descuento" onChange="comprobarDescuento(this);" onclick="loadcalculos();" />
               <label for="chec">Descuento(opcional)</label>
-              <input name="descuento" id="descuento" type="number" step="any" class="form-control" style="display:none" min="0" value="0" onkeyup="ShowSelected();" pattern="^[0-9]+" oninput="this.value = Math.max(this.value, 0)"/>
+              <input name="descuento" id="descuento" type="number" step="any" class="form-control" style="display:none" min="0" value="0" pattern="^[0-9]+" oninput="this.value = Math.max(this.value, 0)"/>
 
-              <button type="submit" name="action" id="mas_descuento" style="display:none" class="btn btn-primary btn-lg" value="descuento">+ Descuento</button>
+              <button  type="submit" name="action" id="mas_descuento" style="display:none" class="btn btn-primary btn-lg" value="descuento"><i class="fa fa-plus fa-1x"></i> Descuento</button>
       </div>
 
           <div class="form-group" style="display:none">
             <label for="" style="float: left">Total:</label>
             <input id="total" name="total" type="number" step="any" class="form-control" readonly="readonly" />
-            {!! $errors->first('total','<small>:message</small><br>') !!}         
+            {!! $errors->first('total','<small class="message_error">:message</small><br>') !!}         
           </div>
 
           <div id="boton_form_factura">
-            <button type="submit" name="action" class="btn btn-primary btn-lg" value="facturar">Facturar</button>    
-            <button type="submit" name="action" class="btn btn-primary btn-lg" value="agregar">Agregar Articulo</button>
+            <button type="submit" name="action" class="btn btn-primary btn-lg" value="final"><i class="fa fa-sign-in fa-1x"></i> Finalizar</button>
+            <button type="submit" name="action" class="btn btn-primary btn-lg" value="facturar"><i class="fa fa-file-text fa-1x"></i> Facturar</button>    
+            <button type="submit" name="action" class="btn btn-primary btn-lg" value="agregar"><i class="fa fa-plus fa-1x"></i> Agregar Articulo</button>
           </div> 
            
         </form>
@@ -105,30 +138,29 @@
   <div>
     
 
-    <table id="tabladetalle" class="table table-bordered table-hover">
+    <table id="tabladetallefactura" class="table table-bordered table-hover">
       <thead>
            <tr>
-              <th scope="col">Id</th>
               <th scope="col">Art</th>
-              <th scope="col">Cantidad</th>
-              <th scope="col">Precio</th>
+              <th scope="col">Talla</i></th>
+              <th scope="col">Cant</th>
               <th scope="col">Monto</th>
            </tr>
       </thead>
   
      @forelse($detalle = DB::table('tbl_facturadetalle')
-                            ->join('tbl_articulo', 'tbl_facturadetalle.idarticulo', '=', 'tbl_articulo.idarticulo')
+                            ->join('tbl_articulovariante', 'tbl_facturadetalle.idarticulov', '=', 'tbl_articulovariante.idarticulov')
+                            ->join('tbl_articulostock', 'tbl_articulovariante.idarticulos', '=', 'tbl_articulostock.idarticulos')
                             ->join('tbl_factura', 'tbl_facturadetalle.idfactura', '=', 'tbl_factura.idfactura')
-                            ->select('tbl_factura.idlfactura', 'tbl_articulo.descripcion', 'tbl_facturadetalle.cantidad','tbl_facturadetalle.precio','tbl_facturadetalle.monto')
+                            ->select('tbl_articulostock.nombrearticulo', 'tbl_articulovariante.talla', 'tbl_facturadetalle.cantidad','tbl_facturadetalle.monto')
                             ->where('tbl_facturadetalle.idfactura', $facturabd->idfactura)
                             ->get()  as $detalleItem)
       
        <tbody>
         <tr>        
-           <th scope="row">{{ $detalleItem->idlfactura }}</th>          
-           <td>{{ $detalleItem->descripcion }}</td>
+           <td>{{ $detalleItem->nombrearticulo }}</td>          
+           <td>{{ $detalleItem->talla }}</td>
            <td>{{ $detalleItem->cantidad }}</td>
-           <td>{{ $detalleItem->precio }}</td>
            <td>{{ $detalleItem->monto }}</td>
         </tr>
            
@@ -144,35 +176,23 @@
      @endforelse
 
      <tr>
-       
-       <td></td>
-       <td></td>
        <th>Subtotal</th>
-       <td colspan="2">{{ $facturabd->subtotal }} C$</td>
+       <td colspan="3">{{ $facturabd->subtotal }} C$</td>
      </tr>
 
-     <tr>
-       
-       <td></td>
-       <td></td>
+     <tr>    
        <th>Iva</th>
-       <td colspan="2">{{ $facturabd->iva }} C$</td>
+       <td colspan="3">{{ $facturabd->iva }} C$</td>
      </tr>
 
-    <tr>
-       
-       <td></td>
-       <td></td>
-       <th>Desc</th>
-       <td colspan="2">{{ $facturabd->descuento }} C$</td>
+    <tr>   
+       <th>Descuento</th>
+       <td colspan="3">{{ $facturabd->descuento }} C$</td>
     </tr>
 
     <tr>
-       
-       <td></td>
-       <td></td>
        <th>Total</th>
-       <td colspan="2">{{ $facturabd->total }} C$</td>
+       <td colspan="3">{{ $facturabd->total }} C$</td>
     </tr>
 
   </table>
@@ -180,32 +200,67 @@
 
 </div>
 
+@section('script')
+<script>
+  $(document).ready(function(){
+
+       function loadvariante()
+       {
+          var idarticulos=$('#idarticulostock').val();
+          if($.trim(idarticulos) != '')
+          {
+              
+            $.get('variante',{idarticulos: idarticulos}, function(variantes){
+                     
+                    var old=$('#idarticulov').data('old') != '' ? $('#idarticulov').data('old') : '';
+                    $('#idarticulov').empty();
+                    $('#idarticulov').append("<option value=''>Selecciona una Talla</option>");
+                    $.each(variantes,function(index,value){
+                      $('#idarticulov').append("<option value='"+index+"'"+ (old==index ? 'selected' : '') +">"+value+"</option>");
+                    })
+            });
+          }
+       }
+       loadvariante();
+      $('#idarticulostock').on('change', loadvariante);
+  });
+
+
+</script>
 
 <script>
   function ShowSelected()
   {
     
    //obtener el id articulo seleccionado
-   var elementos = document.getElementById('idlarticulo').value;
+   var elementos = document.getElementById('color').value;
    console.log(elementos);
-   const subtotalbd = {!! json_encode($facturabd->subtotal ?? '') !!};
-   var subtotal_aux=subtotalbd;
+
 
 
    if(elementos>0)
    {
-   const art = {!! json_encode($articulo ?? '') !!};
-   console.log(art);
-   var precioaux=art[elementos-1].precio;
-   document.getElementById('precio').value=precioaux;
+   var precioaux=document.getElementById('precio').value;
 
    var cantidadaux=document.getElementById('cantidad').value;
    var montoaux=0.00;
    montoaux=precioaux*cantidadaux;
+   console.log("precio:"+precioaux);
+   console.log("cantidad:"+cantidadaux);
+   console.log("monto:"+montoaux);
 
    document.getElementById('monto').value=montoaux;
 
-   //
+   document.getElementById('total').value=parseFloat(montoaux);
+   }
+ 
+ };
+
+ function loadcalculos()
+ {
+   const subtotalbd = {!! json_encode($facturabd->subtotal ?? '') !!};
+   var subtotal_aux=subtotalbd;
+   console.log("subtotal:"+subtotal_aux);
    if(document.getElementById('chec').checked)
    {
       //Este es el Iva 
@@ -218,30 +273,76 @@
 
    if(document.getElementById('chec_descuento').checked)
    {
-     //si el check del descunto esta habilitado
+     //si el check del descuento esta habilitado
    }
    else
    {
       document.getElementById('descuento').value=0;
    }
 
+   var aux=document.getElementById('boton').value;
 
-   var auxiva= document.getElementById('boton').value;
-   var auxdescuento=document.getElementById('descuento').value;
-  
-        if(auxdescuento==null)
-        {
-          auxdescuento=0.00;
-          console.log(auxdescuento);
-        }
+   console.log("Iva:"+aux);
 
-   document.getElementById('total').value=parseFloat(montoaux);
-   }
- 
-
-};
+ }
 window.onload = ShowSelected; //para que cargue la funcion desde el principio
 </script>
 
+
+<script>
+    $(document).ready(function(){
+
+         function loadcolor()
+         { 
+            var idarticulos=$('#idarticulostock').val();
+            var talla=$('#idarticulov option:selected').text()
+            if($.trim(idarticulos) != '')
+            {
+               $.get('colores',{idarticulos: idarticulos,talla: talla}, function(variantes){
+            
+                     var old=$('#color').data('old') != '' ? $('#color').data('old') : '';
+                     $('#color').empty();
+                     $('#color').append("<option value=''>Selecciona color</option>");
+                     $.each(variantes,function(index,value){
+                       $('#color').append("<option value='"+index+"'"+ (old==index ? 'selected' : '') +">"+value+"</option>");
+                     })
+             });
+           }       
+        }
+        loadcolor();
+        $('#idarticulov').on('change', loadcolor);
+    });
+    
+    function loadprecio()
+    {
+        var idarticulov=$('#color').val();
+        var idarticulos=$('#idarticulostock').val();
+        console.log("id stock:"+idarticulos);
+        console.log("id variante:"+idarticulov);
+
+        if($.trim(idarticulov) != '')
+        {
+          $.get('precio',{idarticulov: idarticulov},function(variable){
+
+          $.each(variable,function(index,value){
+             $('#precio').val(value);
+          })     
+        });
+
+        ShowSelected();
+        }
+
+    }
+
+
+
+    $(document).ready(function()
+    {
+         $('#color').on('change',loadprecio);
+    });
+</script>
+
 @endsection
+
+
 

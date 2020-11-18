@@ -13,12 +13,13 @@
 </div>
 </div>
 
-
+<div class="text-center">
+     <h4>Lista de cliente</h4>
+</div>
 
 <table id="tablacliente" class="table table-bordered table-hover">
      <thead>
           <tr>
-             <th scope="col">Id</th>
              <th scope="col">Codigo</th>
              <th scope="col">Nombre</th>
              <th scope="col">Departamento</th>
@@ -29,10 +30,9 @@
 @forelse($cliente as $clienteItem)
      
      <tbody>
-       <tr>        
-          <th scope="row">{{ $clienteItem->idcliente }}</th>          
-          <td>{{ $clienteItem->idlcliente }}</td>
-          <td>{{ $clienteItem->nombre }}</td>
+       <tr>           
+          <td id="codigo_cl">{{ $clienteItem->idlcliente }}</td>
+          <td>{{ $clienteItem->nombre }} {{ $clienteItem->apellido }}</td>
           <td>{{ $clienteItem->departamento }}</td>
           <td>
                <div id="padreenlaces">
@@ -44,7 +44,7 @@
           
 @empty
        <tr>
-         <td>
+         <td colspan="4">
               <p>No hay clientes para mostrar</p>
          </td>
        </tr>

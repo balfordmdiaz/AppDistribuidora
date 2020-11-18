@@ -14,7 +14,8 @@ class FacturaController extends Controller
 {
     public function index()
     {
-        return view('factura');
+        $factura=facturaBD::orderBy('idfactura','DESC')->paginate(5);
+        return view('factura',compact('factura'));
     }
 
 
@@ -22,9 +23,14 @@ class FacturaController extends Controller
     {
         $cliente=clienteBD::get();
         $articulo=articuloBD::get();
-        $factura=facturaBD::get();
+        $factura=facturaBD::latest('idfactura')->first();
         $empleado=empleadoBD::get();
         $detalle=factdetalleDB::get();
+        if(!$factura)
+        {
+            $factura=new facturaBD();
+            $factura->idfactura=0;
+        }
         return view('project.insertarfact',compact('factura','cliente','articulo','empleado','detalle'));
     }
 

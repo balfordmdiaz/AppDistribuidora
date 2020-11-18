@@ -7,11 +7,19 @@
 <br>
 <br>
 <br>
-<div style="text-align:center;">
+<section id="contact-page">
+<div class="container">
+<div class="center">
+  <h3>Detalle Cliente {{ $clientebd->idlcliente }}</h3>
+</div>
+</div>
+</section>
+
+<div id="showcliente" style="text-align:center;">
 <table class="table table-bordered table-hover">
     <tr>
-      <th>Id</th>
-      <td>{{ $clientebd->idlcliente }}</td>
+      <th>Id Cliente</th>
+      <td style="font-weight: bold; text-decoration: underline">{{ $clientebd->idlcliente }}</td>
     </tr>
     <tr>
       <th>Nombre</th>
@@ -44,6 +52,8 @@
 
 </table>
 </div>
+
+
 
 @endsection
 

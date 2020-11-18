@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\factdetalleDB;
 use App\Models\facturaBD;
+use App\Models\articuloBD;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Yajra\DataTables\DataTables;
 use Barryvdh\DomPDF\Facade as PDF;
 
 class FactDetalleController extends Controller
 {
     public function index($id)
-    {
+    {    
         return view('project.vistafactura',[
             'facturabd'=> facturaBD::findOrFail($id)
         ]);
@@ -48,14 +48,14 @@ class FactDetalleController extends Controller
                          'cantidad' => 'required|numeric|gt:0',
                          'total' => 'required|numeric|gt:0',
                      ]);
-
+                     
              
                      factdetalleDB::create([
              
                          'cantidad' => request('cantidad'),
                          'precio' => request('precio'),
                          'monto' => request('monto'),
-                         'idarticulo' => request('idlarticulo'),
+                         'idarticulov' => request('idarticulo'),
                          'idfactura' => $factura->idfactura,
              
                      ]);
@@ -139,9 +139,52 @@ class FactDetalleController extends Controller
             case 'facturar':
                      return redirect()->route('factura.facturar',$factura->idfactura);
                 break;
+            case 'final':
+                return redirect()->route('factura.index');
+            break;
     
 
         }
+
+    }
+
+    public function gettalla(Request $request)
+    {
+           if($request->ajax()){
+              $idarticulov=articuloBD::select('talla')->distinct()->where('idarticulos',$request->idarticulos)->get();
+              $count=1;
+              foreach($idarticulov as $articulo){
+                  $articuloarray[$count] = $articulo->talla;
+                  $count=$count+1;
+              }
+              return response()->json($articuloarray);
+           }
+    }
+
+    public function getcolor(Request $request)
+    {
+        if($request->ajax()){
+            $idarticulov=articuloBD::where('idarticulos','=',$request->idarticulos)->where('talla','LIKE',$request->talla)->get();      
+            foreach($idarticulov as $articulo){
+                
+                $articuloarray[$articulo->idarticulov] = $articulo->color;
+            }
+            return response()->json($articuloarray);
+         }
+         
+
+    }
+
+    public function getprecio(Request $request)
+    {     
+        if($request->ajax()){
+            $idarticulov=articuloBD::where('idarticulov',$request->idarticulov)->get();      
+            foreach($idarticulov as $articulo){
+                
+                $articuloarray[$articulo->idarticulov] = $articulo->precio;
+            }
+            return response()->json($articuloarray);
+         }    
 
     }
 }

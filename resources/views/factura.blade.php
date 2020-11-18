@@ -6,9 +6,7 @@
 <br>
 <br>
 <br>
-<div class="text-center">
-<h2>Opcion de Factura</h2>
-</div>
+
 <div id="boton_nuevoFactura">
     <div class="text-center">
          <h5>Nueva Factura</h5>
@@ -17,6 +15,44 @@
     </div>
 </div>
 
+<div class="text-center">
+    <h4>Lista de Factura</h4>
+</div>
+
+<table id="tablafactura" class="table table-bordered table-hover">
+    <thead>
+         <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Subtotal</th>
+            <th scope="col">Total</th>
+         </tr>
+    </thead>
+
+@forelse($factura as $facturaItem)
+    
+    <tbody>
+      <tr>        
+         <td id="codigo_fac">{{ $facturaItem->idlfactura }}</td>          
+         <td>{{ $facturaItem->fechafactura }}</td>
+         <td>{{ $facturaItem->subtotal }}</td>
+         <td>{{ $facturaItem->total }}</td>
+
+      </tr>
+         
+@empty
+      <tr>
+        <td colspan="4">
+             <p>No hay Factura para mostrar</p>
+        </td>
+      </tr>
+   </tbody>
+@endforelse
+</table>
+
+<div class="text-center">
+    <p>{!! $factura->links() !!}</p>
+</div>
 
 @endsection
    

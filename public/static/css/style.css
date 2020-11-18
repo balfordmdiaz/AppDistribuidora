@@ -237,6 +237,14 @@ a.navbar-brand span {
     #tablacliente {
         font-size: 7pt; /* Hacer mas pequeña las letras de la tabla cuando sea responsive*/
     }
+
+    #tablafactura {
+        font-size: 7pt; /* Hacer mas pequeña las letras de la tabla cuando sea responsive*/
+    }
+
+    #tabladetallefactura {
+        font-size: 8pt; /* Hacer mas pequeña las letras de la tabla cuando sea responsive*/
+    }
 }
 
 /* Estilo al boton nuevo cliente */
@@ -282,6 +290,57 @@ a.navbar-brand span {
 #b_detalle a:hover {
     background: #0063d5;
 }
+
+/*------diseño de tabla-----------------------*/
+
+#tablacliente th
+{
+    background: #36cbd4 ;
+    color: #fff;
+}
+
+#codigo_cl
+{
+    font-weight:bold;
+    color:#004D3E;
+}
+
+#tablafactura th
+{
+    background: #36cbd4 ;
+    color: #fff;
+}
+
+#codigo_fac
+{
+    font-weight:bold;
+    color:#004D3E;
+}
+
+#showcliente table
+{
+    background:#979797;
+    color:#fff;
+}
+
+#showcliente tr:hover
+{
+    color:#787878;
+}
+
+#tabladetallefactura th
+{
+  background: #787878;
+  color:#fff;
+}
+/*---letras de mensaje de error en validaciones---*/
+
+.message_error
+{
+    font-family: sans-serif;
+    color:#B30000;
+}
+
 
 /*--------------------------------------------*/
 

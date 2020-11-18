@@ -44,6 +44,12 @@ Route::post('/factura/insertar',[Messagefactura::class, 'store'])->name('factura
 
 Route::get('/factura/insertar/{id}/index',[FactDetalleController::class, 'index'])->name('factura.vistafactura');
 
+Route::get('/factura/insertar/{id}/variante',[FactDetalleController::class, 'gettalla']);
+
+Route::get('/factura/insertar/{id}/colores',[FactDetalleController::class, 'getcolor']);
+
+Route::get('/factura/insertar/{id}/precio',[FactDetalleController::class, 'getprecio']);
+
 Route::post('/factura/insertar/{id}/index',[FactDetalleController::class, 'store'])->name('factura.agregar');
 
 Route::get('/factura/insertar/{id}/index/facturar',[FactDetalleController::class, 'facturador'])->name('factura.facturar');
