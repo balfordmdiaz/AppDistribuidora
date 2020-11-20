@@ -19,6 +19,52 @@
         <form id="formularioagregar" method="POST" action="{{ route('factura.agregar',$facturabd->idfactura,'store') }}">
          @csrf
 
+           <!----------------------MENSAJES---------------------------->
+           <div class="form-group">
+               @if(session('flash'))
+                   <div class="alert alert-danger" role="alert">
+                       <strong>Aviso</strong>{{ session('flash') }}
+                       <button type="button" class="close" data-dismiss="alert" alert-label="Close">
+                          <span aria-hidden="true"> &times;</span>
+                       </button>
+                   </div>
+               @endif
+           </div>
+
+           <div class="form-group">
+            @if(session('mensaje'))
+                <div class="alert alert-success" role="alert">
+                    <strong>Aviso</strong>{{ session('mensaje') }}
+                    <button type="button" class="close" data-dismiss="alert" alert-label="Close">
+                       <span aria-hidden="true"> &times;</span>
+                    </button>
+                </div>
+            @endif
+           </div>
+
+           <div class="form-group">
+            @if(session('mensaje_iva'))
+                <div class="alert alert-info" role="alert">
+                    <strong>Aviso</strong>{{ session('mensaje_iva') }}
+                    <button type="button" class="close" data-dismiss="alert" alert-label="Close">
+                       <span aria-hidden="true"> &times;</span>
+                    </button>
+                </div>
+            @endif
+           </div>
+
+           <div class="form-group">
+            @if(session('mensaje_descuento'))
+                <div class="alert alert-info" role="alert">
+                    <strong>Aviso</strong>{{ session('mensaje_descuento') }}
+                    <button type="button" class="close" data-dismiss="alert" alert-label="Close">
+                       <span aria-hidden="true"> &times;</span>
+                    </button>
+                </div>
+            @endif
+           </div>
+           <!------------------------------------------------------------->
+
            <div class="form-group">
                 <label for="" style="float: left">Factura:</label>    
                 <input name="idlfactura" type="text" class="form-control" placeholder="Codigo factura" value="{{ $facturabd->idlfactura }}" readonly="readonly">   
@@ -100,7 +146,9 @@
                   <label for="chec">IVA(opcional)</label>
                   <input name="Iva" type="number" id="boton" class="form-control" step="any" style="display:none" placeholder="IVA" readonly="readonly"/>
 
-                  <button type="submit" name="action" id="mas_iva" style="display:none" class="btn btn-primary btn-lg" value="iva"><i class="fa fa-plus fa-1x"></i> Iva</button>
+                  <button type="submit" name="action" id="mas_iva" style="display:none" class="btn btn-primary btn-lg" value="iva"
+                  onclick="toastr.info('El iva ha sido cambiado','Iva Actualizado',{timeOut:5000});"
+                  ><i class="fa fa-plus fa-1x"></i> Iva</button>
           </div>
 
           <div class="form-group">
@@ -108,7 +156,9 @@
               <label for="chec">Descuento(opcional)</label>
               <input name="descuento" id="descuento" type="number" step="any" class="form-control" style="display:none" min="0" value="0" pattern="^[0-9]+" oninput="this.value = Math.max(this.value, 0)"/>
 
-              <button  type="submit" name="action" id="mas_descuento" style="display:none" class="btn btn-primary btn-lg" value="descuento"><i class="fa fa-plus fa-1x"></i> Descuento</button>
+              <button  type="submit" name="action" id="mas_descuento" style="display:none" class="btn btn-primary btn-lg" value="descuento"
+              onclick="toastr.info('El descuento ha sido cambiado','Descuento Actualizado',{timeOut:5000});"
+              ><i class="fa fa-plus fa-1x"></i> Descuento</button>
       </div>
 
           <div class="form-group" style="display:none">
@@ -118,9 +168,11 @@
           </div>
 
           <div id="boton_form_factura">
-            <button type="submit" name="action" class="btn btn-primary btn-lg" value="final"><i class="fa fa-sign-in fa-1x"></i> Finalizar</button>
+            <button type="submit" name="action" class="btn btn-primary btn-lg" value="final"><i class="fa fa-sign-in fa-1x"></i> Salir</button>
             <button type="submit" name="action" class="btn btn-primary btn-lg" value="facturar"><i class="fa fa-file-text fa-1x"></i> Facturar</button>    
-            <button type="submit" name="action" class="btn btn-primary btn-lg" value="agregar"><i class="fa fa-plus fa-1x"></i> Agregar Articulo</button>
+            <button type="submit" name="action" class="btn btn-primary btn-lg" value="agregar"
+            onclick="toastr.success('El registro se ingreso correctamente','Nuevo Registro',{timeOut:5000});"
+            ><i class="fa fa-plus fa-1x"></i> Agregar Articulo</button>
           </div> 
            
         </form>

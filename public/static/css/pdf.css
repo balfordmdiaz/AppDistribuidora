@@ -62,12 +62,22 @@ th
 
 #descarga
 {
-    text-align: center;
-    justify-content: center;
+    float: left;
 }
 
 #descarga a
 {
     text-decoration:none;
-    color:#D7D7D7;
+    color:#ADC4FF;
+}
+
+#salir
+{
+    float: right;
+}
+
+#salir a
+{
+    text-decoration:none;
+    color:#FFAFA4;
 }

@@ -125,6 +125,10 @@
     <a href=" {{ route('factura.descargar',$facturabd->idfactura) }} ">Descargar PDF</a>
 </div>
 
+<div id="salir">
+   <a href=" {{ route('factura.index') }} ">Salir</a>
+</div>
+
 
 
 

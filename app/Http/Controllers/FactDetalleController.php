@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\factdetalleDB;
 use App\Models\facturaBD;
 use App\Models\articuloBD;
+use App\Models\ArticuloStock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -39,17 +40,28 @@ class FactDetalleController extends Controller
     public function store()
     {
         $aux=request('idlfactura');
+        $aux_articulo=request('idarticulo');
         $factura = facturaBD::where('idlfactura', $aux)->first();
+        $cantidad_disponible=articuloBD::where('idarticulov', $aux_articulo)->first();//obtengo articulo seleccionado
+
 
         switch (request()->input('action')) {
             case 'agregar':
 
-                     request()->validate([
+                   request()->validate([
                          'cantidad' => 'required|numeric|gt:0',
                          'total' => 'required|numeric|gt:0',
-                     ]);
-                     
-             
+                   ]);
+
+                   $aux_disponible=$cantidad_disponible->cantidad;//obtener cantida disponible
+                   $aux_talla=$cantidad_disponible->talla;//obtener talla
+                   $aux_color=$cantidad_disponible->color;//obtener color
+                   $aux_cantidad=request('cantidad');//obtener cantidad solicitada por usuario
+                   
+                    //si la cantidad disponible supera a la solicitada que inserte
+                   if($aux_disponible>$aux_cantidad)
+                   {      
+                     //se inserta en detalle factura
                      factdetalleDB::create([
              
                          'cantidad' => request('cantidad'),
@@ -83,10 +95,9 @@ class FactDetalleController extends Controller
                         ]);
                      }
 
-       
-                     $totalbd=($subtotalbd+$ivabd)-$descuentobd;
+                     $totalbd=($subtotalbd+$ivabd)-$descuentobd; //calculo total
 
-
+                     //se actualiza la factura
                      facturaBD::where('idfactura', $factura->idfactura)
                      ->update([
                          'subtotal' => $subtotalbd,
@@ -94,8 +105,23 @@ class FactDetalleController extends Controller
                          
                      ]);
 
+                     //se realiza el cambio en stock
+                     $cantidad_nueva=$aux_disponible-$aux_cantidad;
+                     articuloBD::where('idarticulov', $cantidad_disponible->idarticulov)
+                     ->update([
+                         'cantidad' => $cantidad_nueva,
+                     ]);
 
-                     return back();
+                     return back()->with('mensaje'," Articulo Agregado Correctamente");
+
+                    }
+                    else
+                    {
+                       $nombre_art=ArticuloStock::where('idarticulos',request('idarticulos'))->first();
+                       $mensaje=" Cantidad excede a la disponible en el inventario-".$nombre_art->nombrearticulo." ".$aux_talla." ".$aux_color." cantidad actual:".$aux_disponible;
+                       return back()->with('flash',$mensaje);
+                    }
+
                 break;
     
             case 'descuento':
@@ -114,9 +140,14 @@ class FactDetalleController extends Controller
                             
                         ]);
 
-                     } 
+                        return back()->with('mensaje_descuento'," Descuento actualizado correctamente");
+                     }
+                     else
+                     {
+                        return back()->with('flash'," Descuento no puede ser mayor o igual al Total");
+                     }
 
-                     return back();
+                     
                 break;
 
             case 'iva':
@@ -133,7 +164,7 @@ class FactDetalleController extends Controller
                          
                      ]);
 
-                     return back();
+                     return back()->with('mensaje_iva'," Iva actualizado correctamente");
                break;
 
             case 'facturar':
