@@ -16,7 +16,7 @@
 </div>
 
 <div class="text-center">
-    <h4>Lista de Factura</h4>
+    <h4>Lista de Factura Hoy</h4>
 </div>
 
 <table id="tablafactura" class="table table-bordered table-hover">

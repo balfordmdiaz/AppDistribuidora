@@ -34,7 +34,7 @@
                   <label for="idemp" style="float: left">Empleado:</label>
                   <select  id="idlempleado" name="idlempleado" class="form-control">
                       @forelse($empleado as $empleadoItem)
-                            <option value="{{ $empleadoItem->idempleado }}">{{ $empleadoItem->idlempleado }} {{ $empleadoItem->nombre }}</option>
+                            <option value="{{ $empleadoItem->idempleado }}">{{ $empleadoItem->idlempleado }} {{ $empleadoItem->nombre }} {{ $empleadoItem->apellido }}</option>
                         
                       @empty
                             <option value="">No hay Empleado</option>

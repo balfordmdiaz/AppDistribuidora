@@ -168,7 +168,15 @@ class FactDetalleController extends Controller
                break;
 
             case 'facturar':
-                     return redirect()->route('factura.facturar',$factura->idfactura);
+                     $cantidad_registrada=factdetalleDB::where('idfactura', $factura->idfactura)->exists();
+                     if($cantidad_registrada)
+                     {
+                        return redirect()->route('factura.facturar',$factura->idfactura);
+                     }
+                     else
+                     {
+                        return back()->with('flash'," No hay articulos en la factura");
+                     }        
                 break;
             case 'final':
                 return redirect()->route('factura.index');

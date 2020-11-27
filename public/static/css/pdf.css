@@ -1,33 +1,29 @@
 body
 {
     font-family: "ARIAL", serif;
-    font-size: 12pt;
+    font-size: 14pt;
 }
 
 #datos_empresa
 {
-    font-size: 7pt;
+    text-align: center;
 }
 
 
 #datos_factura
 {
     font-weight: bold;
-    font-size: 7pt;
+    text-align: center;
 }
 
 #datos_cliente
 {
-    
-    justify-content: center;
-    font-size: 6pt;
+    text-align: center;
 }
 
 #datos_empleado
 {
-    
-    justify-content: center;
-    font-size: 6pt;
+    text-align: center;    
 }
 
 label
@@ -35,28 +31,37 @@ label
     font-weight: bold;
 }
 
-table, td, th 
+table
 {
-    border: 1px solid #ABABAB;
+    font-size: 14pt;
+}
+
+table, td, th 
+{  
+    padding: 1px;
 }
 
 td
 {
     text-align: left;
 }
+
+thead tr
+{
+    text-decoration: underline;
+}
   
 table 
 {
     width: 100%;
     border-collapse: collapse;
-    font-size: 8pt;
+    
 }
 
 th
 {
     text-align: left;
-    background-color: #979797;
-    color: #fff;
+    font-weight: bold;
 }
 
 
@@ -69,6 +74,39 @@ th
 {
     text-decoration:none;
     color:#ADC4FF;
+}
+
+div.w-33 
+{
+    width: 100%;
+}
+  
+div.center 
+{
+   text-align: center;
+}
+
+#imprimir_pdf
+{
+    float:none;
+	text-align:center;
+    display:inline;
+    border:0;
+    padding:0;
+    margin:0;
+    text-decoration:none;
+    background:none;
+    color:#DCABFF;
+    font-family: arial, sans-serif;
+    font-size: 1em;
+    line-height:1em;
+}
+
+#imprimir_pdf:hover 
+{
+    text-decoration:none;
+    color:#9300FF;
+    cursor:pointer;
 }
 
 #salir

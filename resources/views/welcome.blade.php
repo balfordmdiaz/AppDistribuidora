@@ -9,13 +9,6 @@
                     
                     @include('partials.banner')
 
-                    @guest
-                       @if (Route::has('login'))
-
-                       @endif
-                    @else
-                       @include('partials.botones_inicio')
-                    @endguest
                 </div>
             </div>
         </div>

@@ -16,7 +16,7 @@ class ClienteController extends Controller
         //return view('cliente', ['cliente' => $cliente]);
 
         $cliente=clienteBD::orderBy('idcliente','DESC')->paginate(5);
-        return view('cliente',compact('cliente'));
+        return view('/cliente',compact('cliente'));
     }
 
      public function show($id)

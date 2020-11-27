@@ -5,20 +5,18 @@
 @section('content')
 
 
-   <div id="datos_empresa" style="float: left">
+   <div id="datos_empresa" >
       <h2>Distribuidora Hermanos Diaz</h2>
       <p>Direccion Completa</p>
       <p>Numero de Telefono</p>
    </div>
 
-   <div id="datos_factura" style="float: right">
+   <div id="datos_factura" >
       <h3>Factura</h3>
       Nro. Factura:{{$facturabd->idlfactura}}
       <br>
       Fecha:{{$facturabd->fechafactura}}
    </div>
-
-   <br><br><br><br>
 
    <div id="datos_cliente" style="">
       <h3 style="text-decoration: underline">Facturar a:</h3>
@@ -61,7 +59,6 @@
          <tr>
             <th scope="col">Articulo</th>
             <th scope="col">Talla</th>
-            <th scope="col">color</th>
             <th scope="col">Cant</th>
             <th scope="col">Monto</th>
          </tr>
@@ -71,14 +68,13 @@
                           ->join('tbl_articulovariante', 'tbl_facturadetalle.idarticulov', '=', 'tbl_articulovariante.idarticulov')
                           ->join('tbl_factura', 'tbl_facturadetalle.idfactura', '=', 'tbl_factura.idfactura')
                           ->join('tbl_articulostock', 'tbl_articulovariante.idarticulos', '=', 'tbl_articulostock.idarticulos')
-                          ->select('tbl_articulostock.nombrearticulo','tbl_articulovariante.talla','tbl_articulovariante.color','tbl_facturadetalle.cantidad','tbl_facturadetalle.monto')
+                          ->select('tbl_articulostock.nombrearticulo','tbl_articulovariante.talla','tbl_facturadetalle.cantidad','tbl_facturadetalle.monto')
                           ->where('tbl_facturadetalle.idfactura', $facturabd->idfactura)
                           ->get()  as $detalleItem)    
      <tbody>
       <tr>                 
          <td>{{ $detalleItem->nombrearticulo }}</td>  
-         <td>{{ $detalleItem->talla }}</td>  
-         <td>{{ $detalleItem->color }}</td> 
+         <td>{{ $detalleItem->talla }}</td>   
          <td>{{ $detalleItem->cantidad }}</td>  
          <td>{{ $detalleItem->monto }} C$</td>
       </tr>        
@@ -89,29 +85,29 @@
     </tbody>
    @endforelse
 
- 
+   
    <tr>
-      <td></td>
-      <th>Subtotal</th>
-      <td colspan="3">{{ $facturabd->subtotal }} C$</td>
+      
+      <th style="text-decoration: underline">Subtotal</th>
+      <td colspan="4">{{ $facturabd->subtotal }} C$</td>
    </tr>
 
    <tr>
-      <td></td>
-      <th>Iva</th>
-      <td colspan="3">{{ $facturabd->iva }} C$</td>
+      
+      <th style="text-decoration: underline">Iva</th>
+      <td colspan="4">{{ $facturabd->iva }} C$</td>
    </tr>
 
    <tr>
-      <td></td>
-      <th>Descuento</th>
-      <td colspan="3">{{ $facturabd->descuento }} C$</td>
+      
+      <th style="text-decoration: underline">Descuento</th>
+      <td colspan="4">{{ $facturabd->descuento }} C$</td>
    </tr>
 
    <tr>
-      <td></td>
-      <th>Total</th>
-      <td colspan="3">{{ $facturabd->total }} C$</td>
+      
+      <th style="text-decoration: underline">Total</th>
+      <td colspan="4">{{ $facturabd->total }} C$</td>
    </tr>
 
 </table>
@@ -122,7 +118,7 @@
 
 
 <div id="descarga">
-    <a href=" {{ route('factura.descargar',$facturabd->idfactura) }} ">Descargar PDF</a>
+    <a href=" {{ route('factura.descargar',$facturabd->idfactura) }} ">Descargar PDF</a>   
 </div>
 
 <div id="salir">
@@ -130,8 +126,17 @@
 </div>
 
 
-
-
-
+<div class="w-33">
+   <div class="center">
+           <button id="imprimir_pdf" onclick="imprimir()">Imprimir PDF</button>
+   </div>
+</div>
 
 @endsection
+
+<script type="text/javascript">
+   function imprimir()
+   {   
+     window.print();   
+   } 
+</script>
